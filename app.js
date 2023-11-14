@@ -1,3 +1,5 @@
+let listaNumeroSorteado = [];
+let limiteLista = 20;
 let numeroSecreto = gerarNumeroAleatorio();
 let tentativas = 1;
 
@@ -5,6 +7,7 @@ let tentativas = 1;
 function exibirTextoNaTela(tag, texto){
     let campo = document.querySelector(tag);
     campo.innerHTML = texto;
+    responsiveVoice.speak(texto, 'Brazilian Portuguese Female', {rate:1.2})
 }
 
 function mensagemInicial(){
@@ -47,7 +50,19 @@ function limparCampo(){
 
 
 function gerarNumeroAleatorio() {
-    return parseInt(Math.random() * 20 + 1)
+   let numeroEscolhido = parseInt(Math.random() * limiteLista + 1);
+   let quantidadeElementosLista = listaNumeroSorteado.length;
+
+   if (quantidadeElementosLista == limiteLista){
+    listaNumeroSorteado = [];
+   } 
+
+   if (listaNumeroSorteado.includes(numeroEscolhido)){
+    return gerarNumeroAleatorio();
+   }else {
+    listaNumeroSorteado.push(numeroEscolhido);
+    return numeroEscolhido;
+   }
 }
 
 
